@@ -1,0 +1,54 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Net;
+using System.IO;
+namespace ConsoleApplication1
+{
+    class Program
+    {
+        class names
+        {
+            string[,] array = new string[356017,4];
+            //gereftane masire database
+            public void filepath(string path)
+            {
+                var col1 = new List<string>();
+                var col2 = new List<string>();
+                var col3 = new List<string>();
+                var col4 = new List<string>();
+                using (var rd = new StreamReader(path))
+                {
+                  while (!rd.EndOfStream)
+                    {
+                        var splits = rd.ReadLine().Split(',');
+                        col1.Add(splits[0]);
+                        col2.Add(splits[1]);
+                        col3.Add(splits[2]);
+                        col4.Add(splits[3]);
+
+                    }
+                }
+
+                int j = 0, n = 0;
+                for (int i = 0; i < 356017; i++)
+                {
+                    array[j, 0] = col1[n];
+                    array[j, 1] = col2[n];
+                    array[j, 2] = col3[n];
+                    array[j, 3] = col4[n];
+                    j++;
+                    n++;
+                }
+            
+            } 
+             static void Main(string[] args)
+            {
+               string str = Console.ReadLine();
+                names c = new names();
+                c.filepath(str);
+            }
+        }
+     }
