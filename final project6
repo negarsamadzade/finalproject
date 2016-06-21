@@ -1,0 +1,112 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Net;
+using System.IO;
+namespace ConsoleApplication1
+{
+    class Program
+    {
+        class names
+        {
+            string[,] array = new string[356017,4];
+            //gereftane masire database
+            public void filepath(string path)
+            {
+                var col1 = new List<string>();
+                var col2 = new List<string>();
+                var col3 = new List<string>();
+                var col4 = new List<string>();
+                using (var rd = new StreamReader(path))
+                {
+                  while (!rd.EndOfStream)
+                    {
+                        var splits = rd.ReadLine().Split(',');
+                        col1.Add(splits[0]);
+                        col2.Add(splits[1]);
+                        col3.Add(splits[2]);
+                        col4.Add(splits[3]);
+
+                    }
+                }
+
+                int j = 0, n = 0;
+                for (int i = 0; i < 356017; i++)
+                {
+                    array[j, 0] = col1[n];
+                    array[j, 1] = col2[n];
+                    array[j, 2] = col3[n];
+                    array[j, 3] = col4[n];
+                    j++;
+                    n++;
+                }
+                
+            
+            } 
+            
+            
+            public string shomordane_ayalatha()
+            {
+                int a1 = 0, a2 = 0, a3 = 0, a4 = 0;
+                for (int i = 1; i < 356017; i++)
+                {
+                    switch (array[i, 3])
+                    {
+                        case "AK": a1++; break;
+                        case "AL": a2++; break;
+                        case "AR": a3++; break;
+                        case "AZ": a4++; break;
+                    }
+
+                }
+                string tedad = "";
+                tedad += a1 + ";" + a2 + ";" + a3 + ";" + a4;
+                return tedad;
+            }
+            public string ehtemal()
+            {
+                double p_ak = 0, p_al = 0, p_ar = 0, p_az = 0;
+                int n = 356017;
+                string s = shomordane_ayalatha();
+                string[] ehtemal_class = s.Split(';');
+                p_ak = (double.Parse(ehtemal_class[0]) / n);
+                p_al = (double.Parse(ehtemal_class[1]) / n);
+                p_ar = (double.Parse(ehtemal_class[2]) / n);
+                p_az = (double.Parse(ehtemal_class[3]) / n);
+                string ehtemale1 = p_ak + ";" + p_al + ";" + p_ar + ";" + p_az;
+                return ehtemale1;
+
+            }
+               public string result(string nemune)
+              {
+                string result = "";
+                int ak = 0, al = 0, ar = 0, az = 0, ak1 = 0, al1 = 0, ar1 = 0, az1 = 0, ak2 = 0, al2 = 0, ar2 = 0, az2 = 0;
+                string[] arr1 = nemune.Split(';');
+                string s = shomordane_ayalatha();
+                string[] arr2 = s.Split(';');
+                for (int i = 0; i < 356017; i++)
+                {
+                    if (array[i, 0] == arr1[0] && array[i, 3] == "AK") ak++;
+                    if (array[i, 0] == arr1[0] && array[i, 3] == "AL") al++;
+                    if (array[i, 0] == arr1[0] && array[i, 3] == "AR") ar++;
+                    if (array[i, 0] == arr1[0] && array[i, 3] == "AZ") az++;
+                    if (array[i, 1] == arr1[1] && array[i, 3] == "AK") ak1++;
+                    if (array[i, 1] == arr1[1] && array[i, 3] == "AL") al1++;
+                    if (array[i, 1] == arr1[1] && array[i, 3] == "AR") ar1++;
+                    if (array[i, 1] == arr1[1] && array[i, 3] == "AZ") az1++;
+                    if (array[i, 2] == arr1[2] && array[i, 3] == "AK") ak2++;
+                    if (array[i, 2] == arr1[2] && array[i, 3] == "AL") al2++;
+                    if (array[i, 2] == arr1[2] && array[i, 3] == "AR") ar2++;
+                    if (array[i, 2] == arr1[2] && array[i, 3] == "AZ") az2++;
+                }
+                }
+             static void Main(string[] args)
+            {
+               string str = Console.ReadLine();
+                names c = new names();
+                c.filepath(str);
+            }
+        }
+     }
