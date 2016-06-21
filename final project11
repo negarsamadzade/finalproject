@@ -1,0 +1,158 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Net;
+using System.IO;
+namespace ConsoleApplication1
+{
+    class Program
+    {
+        class names
+        {
+            string[,] array = new string[356017,4];
+            //gereftane masire database
+            public void filepath(string path)
+            {
+                var col1 = new List<string>();
+                var col2 = new List<string>();
+                var col3 = new List<string>();
+                var col4 = new List<string>();
+                using (var rd = new StreamReader(path))
+                {
+                  while (!rd.EndOfStream)
+                    {
+                        var splits = rd.ReadLine().Split(',');
+                        col1.Add(splits[0]);
+                        col2.Add(splits[1]);
+                        col3.Add(splits[2]);
+                        col4.Add(splits[3]);
+
+                    }
+                }
+
+                int j = 0, n = 0;
+                for (int i = 0; i < 356017; i++)
+                {
+                    array[j, 0] = col1[n];
+                    array[j, 1] = col2[n];
+                    array[j, 2] = col3[n];
+                    array[j, 3] = col4[n];
+                    j++;
+                    n++;
+                }
+                
+            
+            } 
+            
+            
+            public string shomordane_ayalatha()
+            {
+                int a1 = 0, a2 = 0, a3 = 0, a4 = 0;
+                for (int i = 1; i < 356017; i++)
+                {
+                    switch (array[i, 3])
+                    {
+                        case "AK": a1++; break;
+                        case "AL": a2++; break;
+                        case "AR": a3++; break;
+                        case "AZ": a4++; break;
+                    }
+
+                }
+                string tedad = "";
+                tedad += a1 + ";" + a2 + ";" + a3 + ";" + a4;
+                return tedad;
+            }
+            public string ehtemal()
+            {
+                double p_ak = 0, p_al = 0, p_ar = 0, p_az = 0;
+                int n = 356017;
+                string s = shomordane_ayalatha();
+                string[] ehtemal_class = s.Split(';');
+                p_ak = (double.Parse(ehtemal_class[0]) / n);
+                p_al = (double.Parse(ehtemal_class[1]) / n);
+                p_ar = (double.Parse(ehtemal_class[2]) / n);
+                p_az = (double.Parse(ehtemal_class[3]) / n);
+                string ehtemale1 = p_ak + ";" + p_al + ";" + p_ar + ";" + p_az;
+                return ehtemale1;
+
+            }
+               public string result(string nemune)
+              {
+                string result = "";
+                int ak = 0, al = 0, ar = 0, az = 0, ak1 = 0, al1 = 0, ar1 = 0, az1 = 0, ak2 = 0, al2 = 0, ar2 = 0, az2 = 0;
+                string[] arr1 = nemune.Split(';');
+                string s = shomordane_ayalatha();
+                string[] arr2 = s.Split(';');
+                for (int i = 0; i < 356017; i++)
+                {
+                    if (array[i, 0] == arr1[0] && array[i, 3] == "AK") ak++;
+                    if (array[i, 0] == arr1[0] && array[i, 3] == "AL") al++;
+                    if (array[i, 0] == arr1[0] && array[i, 3] == "AR") ar++;
+                    if (array[i, 0] == arr1[0] && array[i, 3] == "AZ") az++;
+                    if (array[i, 1] == arr1[1] && array[i, 3] == "AK") ak1++;
+                    if (array[i, 1] == arr1[1] && array[i, 3] == "AL") al1++;
+                    if (array[i, 1] == arr1[1] && array[i, 3] == "AR") ar1++;
+                    if (array[i, 1] == arr1[1] && array[i, 3] == "AZ") az1++;
+                    if (array[i, 2] == arr1[2] && array[i, 3] == "AK") ak2++;
+                    if (array[i, 2] == arr1[2] && array[i, 3] == "AL") al2++;
+                    if (array[i, 2] == arr1[2] && array[i, 3] == "AR") ar2++;
+                    if (array[i, 2] == arr1[2] && array[i, 3] == "AZ") az2++;
+                }
+                 string ehtemal1 = ehtemal();
+                string[] ehtemale_class = ehtemal1.Split(';');
+                double n1 = ak / double.Parse(arr2[0]);//ehtemale name vurudi dar AK
+                double n2 = al / double.Parse(arr2[1]);//ehtemale name vurudi dar AL
+                double n3 = ar / double.Parse(arr2[2]);//ehtemale name vurudi dar AR
+                double n4 = az / double.Parse(arr2[3]);//ehtemale name vurudi dar AZ
+                double n11 = ak1 / double.Parse(arr2[0]);//ehtemale sale vurudi dar AK
+                double n22 = al1 / double.Parse(arr2[1]);//ehtemale sale vurudi dar AL
+                double n33 = ar1 / double.Parse(arr2[2]);//ehtemale sale vurudi dar AR
+                double n44 = az1 / double.Parse(arr2[3]);//ehtemale sale vurudi dar AZ
+                double n111 = ak2 / double.Parse(arr2[0]);//ehtemale gendere vurudi dar AK
+                double n222 = al2 / double.Parse(arr2[1]);//ehtemale gendere vurudi dar AL
+                double n333 = ar2 / double.Parse(arr2[2]);//ehtemale gendere vurudi dar AR
+                double n444 = az2 / double.Parse(arr2[3]);//
+                 if (n1 == 0 || n11 == 0 || n111 == 0)
+                {
+                    if (n1 == 0)
+                        n1 = 1 / double.Parse(arr2[0]);
+                    else if (n11 == 0) n11 = 1 / double.Parse(arr2[0]);
+                    else if (n111 == 0) n111 = 1 / double.Parse(arr2[0]);
+                }
+                 if (n2 == 0 || n22 == 0 || n222 == 0)
+                {
+                    if (n2 == 0)
+                        n2 = 1 / double.Parse(arr2[1]);
+                    else if (n22 == 0) n22 = 1 / double.Parse(arr2[1]);
+                    else if (n222 == 0) n222 = 1 / double.Parse(arr2[1]);
+                }
+                if (n3 == 0 || n33 == 0 || n333 == 0)
+                {
+                    if (n3 == 0)
+                        n3 = 1 / double.Parse(arr2[2]);
+                    else if (n33 == 0) n33 = 1 / double.Parse(arr2[2]);
+                    else if (n333 == 0) n333 = 1 / double.Parse(arr2[2]);
+                }
+                 if (n4 == 0 || n44 == 0 || n444 == 0)
+                {
+                    if (n4 == 0)
+                        n4 = 1 / double.Parse(arr2[3]);
+                    else if (n44 == 0) n44 = 1 / double.Parse(arr2[3]);
+                    else if (n444 == 0) n444 = 1 / double.Parse(arr2[3]);
+                }
+                 double r1 = n1 * n11 * n111 * double.Parse(ehtemale_class[0]);//ehtemale tallogh be AK
+                double r2 = n2 * n22 * n222 * double.Parse(ehtemale_class[1]);//ehtemale talogh be AL
+                double r3 = n3 * n33 * n333 * double.Parse(ehtemale_class[2]);//ehtemale talogh be AR
+                double r4 = n4 * n44 * n444 * double.Parse(ehtemale_class[3]);//ehtemale talogh be AZ
+                }
+             static void Main(string[] args)
+            {
+               string str = Console.ReadLine();
+                names c = new names();
+                c.filepath(str);
+            }
+        }
+     }
