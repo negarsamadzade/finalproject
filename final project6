@@ -101,6 +101,20 @@ namespace ConsoleApplication1
                     if (array[i, 2] == arr1[2] && array[i, 3] == "AR") ar2++;
                     if (array[i, 2] == arr1[2] && array[i, 3] == "AZ") az2++;
                 }
+                 string ehtemal1 = ehtemal();
+                string[] ehtemale_class = ehtemal1.Split(';');
+                double n1 = ak / double.Parse(arr2[0]);//ehtemale name vurudi dar AK
+                double n2 = al / double.Parse(arr2[1]);//ehtemale name vurudi dar AL
+                double n3 = ar / double.Parse(arr2[2]);//ehtemale name vurudi dar AR
+                double n4 = az / double.Parse(arr2[3]);//ehtemale name vurudi dar AZ
+                double n11 = ak1 / double.Parse(arr2[0]);//ehtemale sale vurudi dar AK
+                double n22 = al1 / double.Parse(arr2[1]);//ehtemale sale vurudi dar AL
+                double n33 = ar1 / double.Parse(arr2[2]);//ehtemale sale vurudi dar AR
+                double n44 = az1 / double.Parse(arr2[3]);//ehtemale sale vurudi dar AZ
+                double n111 = ak2 / double.Parse(arr2[0]);//ehtemale gendere vurudi dar AK
+                double n222 = al2 / double.Parse(arr2[1]);//ehtemale gendere vurudi dar AL
+                double n333 = ar2 / double.Parse(arr2[2]);//ehtemale gendere vurudi dar AR
+                double n444 = az2 / double.Parse(arr2[3]);//
                 }
              static void Main(string[] args)
             {
